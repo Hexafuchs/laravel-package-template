@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Hexafuchs\Skeleton;
 
 use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
+use Hexafuchs\Skeleton\Commands\SkeletonCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class PackageServiceProvider extends ServiceProvider
 {
     public function configurePackage(Package $package): void
     {

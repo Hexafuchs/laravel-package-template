@@ -1,12 +1,12 @@
 {
-    "name": ":vendor_slug/:package_slug",
+    "name": "hexafuchs/:package_slug",
     "description": ":package_description",
     "keywords": [
-        ":vendor_name",
+        "Hexafuchs",
         "laravel",
         ":package_slug"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/hexafuchs/:package_slug",
     "license": "MIT",
     "authors": [
         {
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Hexafuchs\\Skeleton\\": "src/",
+            "Hexafuchs\\Skeleton\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Hexafuchs\\Skeleton\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -73,10 +73,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Hexafuchs\\Skeleton\\PackageServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Skeleton": "Hexafuchs\\Skeleton\\Facades\\Skeleton"
             }
         }
     },

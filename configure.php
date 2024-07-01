@@ -133,12 +133,12 @@ function determineSeparator(string $path): string
 
 function replaceForWindows(): array
 {
-    return preg_split('/\\r\\n|\\r|\\n/', run('dir /S /B * | findstr /v /i .git\ | findstr /v /i vendor | findstr /v /i '.basename(__FILE__).' | findstr /r /i /M /F:/ ":author :vendor :package VendorName skeleton migration_table_name vendor_name vendor_slug author@domain.com"'));
+    return preg_split('/\\r\\n|\\r|\\n/', run('dir /S /B * | findstr /v /i .git\ | findstr /v /i vendor | findstr /v /i '.basename(__FILE__).' | findstr /r /i /M /F:/ ":author :vendor :package skeleton migration_table_name author@domain.com"'));
 }
 
 function replaceForAllOtherOSes(): array
 {
-    return explode(PHP_EOL, run('grep -E -r -l -i ":author|:vendor|:package|VendorName|skeleton|migration_table_name|vendor_name|vendor_slug|author@domain.com" --exclude-dir=vendor ./* ./.github/* | grep -v '.basename(__FILE__)));
+    return explode(PHP_EOL, run('grep -E -r -l -i ":author|:vendor|:package|skeleton|migration_table_name|author@domain.com" --exclude-dir=vendor ./* ./.github/* | grep -v '.basename(__FILE__)));
 }
 
 function getGitHubApiEndpoint(string $endpoint): ?stdClass
@@ -248,15 +248,6 @@ $gitEmail = run('git config user.email');
 $authorEmail = ask('Author email', $gitEmail);
 $authorUsername = ask('Author username', guessGitHubUsername());
 
-$guessGitHubVendorInfo = guessGitHubVendorInfo($authorName, $authorUsername);
-
-$vendorName = ask('Vendor name', $guessGitHubVendorInfo[0]);
-$vendorUsername = ask('Vendor username', $guessGitHubVendorInfo[1] ?? slugify($vendorName));
-$vendorSlug = slugify($vendorUsername);
-
-$vendorNamespace = str_replace('-', '', ucwords($vendorName));
-$vendorNamespace = ask('Vendor namespace', $vendorNamespace);
-
 $currentDirectory = getcwd();
 $folderName = basename($currentDirectory);
 
@@ -264,7 +255,7 @@ $packageName = ask('Package name', $folderName);
 $packageSlug = slugify($packageName);
 $packageSlugWithoutPrefix = remove_prefix('laravel-', $packageSlug);
 
-$className = title_case($packageName);
+$className = remove_prefix('Laravel', title_case($packageName));
 $className = ask('Class name', $className);
 $variableName = lcfirst($className);
 $description = ask('Package description', "This is my package {$packageSlug}");
@@ -277,9 +268,9 @@ $useUpdateChangelogWorkflow = confirm('Use automatic changelog updater workflow?
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
-writeln("Vendor     : {$vendorName} ({$vendorSlug})");
+writeln("Vendor     : Hexafuchs (hexafuchs)");
 writeln("Package    : {$packageSlug} <{$description}>");
-writeln("Namespace  : {$vendorNamespace}\\{$className}");
+writeln("Namespace  : Hexafuchs\\{$className}");
 writeln("Class name : {$className}");
 writeln('---');
 writeln('Packages & Utilities');
@@ -303,9 +294,6 @@ foreach ($files as $file) {
         ':author_name' => $authorName,
         ':author_username' => $authorUsername,
         'author@domain.com' => $authorEmail,
-        ':vendor_name' => $vendorName,
-        ':vendor_slug' => $vendorSlug,
-        'VendorName' => $vendorNamespace,
         ':package_name' => $packageName,
         ':package_slug' => $packageSlug,
         ':package_slug_without_prefix' => $packageSlugWithoutPrefix,
@@ -318,7 +306,6 @@ foreach ($files as $file) {
 
     match (true) {
         str_contains($file, determineSeparator('src/Skeleton.php')) => rename($file, determineSeparator('./src/'.$className.'.php')),
-        str_contains($file, determineSeparator('src/SkeletonServiceProvider.php')) => rename($file, determineSeparator('./src/'.$className.'ServiceProvider.php')),
         str_contains($file, determineSeparator('src/Facades/Skeleton.php')) => rename($file, determineSeparator('./src/Facades/'.$className.'.php')),
         str_contains($file, determineSeparator('src/Commands/SkeletonCommand.php')) => rename($file, determineSeparator('./src/Commands/'.$className.'Command.php')),
         str_contains($file, determineSeparator('database/migrations/create_skeleton_table.php.stub')) => rename($file, determineSeparator('./database/migrations/create_'.title_snake($packageSlugWithoutPrefix).'_table.php.stub')),
@@ -361,6 +348,6 @@ if (! $useUpdateChangelogWorkflow) {
     safeUnlink(__DIR__.'/.github/workflows/update-changelog.yml');
 }
 
-confirm('Execute `composer install` and run tests?') && run('composer install && composer test');
+confirm('Execute `composer install` and run tests?', true) && run('composer install && composer test');
 
 confirm('Let this script delete itself?', true) && unlink(__FILE__);
