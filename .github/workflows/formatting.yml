@@ -1,15 +1,19 @@
-name: Fix PHP code style issues
+# Original by Spatie licensed as MIT
+# https://github.com/spatie/package-skeleton-laravel/blob/main/.github/workflows/fix-php-code-style-issues.yml
+
+name: Run Formatter
 
 on:
   push:
     paths:
+      - '.github/workflows/formatting.yml'
       - '**.php'
 
 permissions:
   contents: write
 
 jobs:
-  php-code-styling:
+  formatting:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -25,4 +29,4 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Fix styling
+          commit_message: ":art: Fix styling"
