@@ -64,3 +64,6 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest --ci
+
+      - name: Execute build
+        run: composer run build
