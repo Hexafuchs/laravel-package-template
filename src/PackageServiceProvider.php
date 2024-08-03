@@ -6,6 +6,9 @@ use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider as ServiceProvider;
 use Hexafuchs\Skeleton\Commands\SkeletonCommand;
 
+/**
+ * Registration of the package.
+ */
 class PackageServiceProvider extends ServiceProvider
 {
     public function configurePackage(Package $package): void
