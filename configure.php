@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
-# Original by Spatie licensed as MIT
-# https://github.com/spatie/package-skeleton-laravel/blob/main/configure.php
 
+// Original by Spatie licensed as MIT
+// https://github.com/spatie/package-skeleton-laravel/blob/main/configure.php
 
 function ask(string $question, string $default = ''): string
 {
@@ -271,7 +271,7 @@ $useUpdateChangelogWorkflow = confirm('Use automatic changelog updater workflow?
 
 writeln('------');
 writeln("Author     : {$authorName} ({$authorUsername}, {$authorEmail})");
-writeln("Vendor     : Hexafuchs (hexafuchs)");
+writeln('Vendor     : Hexafuchs (hexafuchs)');
 writeln("Package    : {$packageSlug} <{$description}>");
 writeln("Namespace  : Hexafuchs\\{$className}");
 writeln("Class name : {$className}");
