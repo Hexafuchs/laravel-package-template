@@ -2,6 +2,9 @@
 
 namespace Hexafuchs\Skeleton;
 
+/**
+ *
+ */
 class Skeleton
 {
 }

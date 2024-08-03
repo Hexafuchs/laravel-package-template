@@ -46,17 +46,21 @@ Optionally, you can publish the views using
 php artisan vendor:publish --tag=":package_slug-views"
 ```
 
-## Usage
+## Documentation
 
-```php
-$variable = new Hexafuchs\Skeleton();
-echo $variable->echoPhrase('Hello, Hexafuchs!');
-```
+You can find the entire documentation at [https://hexafuchs.github.io/:package_name/](https://hexafuchs.github.io/:package_name/guide/getting-started/index.html).
 
 ## Testing
 
 ```bash
 composer test
+```
+
+## Docs
+
+```bash
+composer run docs:install  # only required on first run
+composer run docs
 ```
 
 ## Changelog
