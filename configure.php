@@ -305,7 +305,7 @@ foreach ($files as $file) {
         'migration_table_name' => title_snake($packageSlugWithoutPrefix),
         'variable' => $variableName,
         ':package_description' => $description,
-        'spatie/package-' . $packageSlug . '-laravel' => 'spatie/package-skeleton-laravel'
+        'spatie/package-'.$packageSlug.'-laravel' => 'spatie/package-skeleton-laravel',
     ]);
 
     match (true) {
@@ -368,6 +368,6 @@ if (confirm('Execute `composer install` and run tests?', true)) {
         run('./vendor/bin/testbench workbench:install');
 
     }
-};
+}
 
 confirm('Let this script delete itself?', true) && unlink(__FILE__);
