@@ -47,11 +47,11 @@ class TestCase extends Orchestra
     public function backwardCompatibleDatabase()
     {
         $db = 'workbench/.testing.db';
-        $filesystem = new Filesystem();
+        $filesystem = new Filesystem;
         config()->set('database.connections.testing.database', $db);
 
         if ($filesystem->missing($db)) {
-            $filesystem->put($db, "");
+            $filesystem->put($db, '');
         }
     }
 }
