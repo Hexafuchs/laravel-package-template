@@ -302,9 +302,10 @@ foreach ($files as $file) {
         ':package_slug_without_prefix' => $packageSlugWithoutPrefix,
         'Skeleton' => $className,
         'skeleton' => $packageSlug,
-        'migration_table_name' => title_snake($packageSlug),
+        'migration_table_name' => title_snake($packageSlugWithoutPrefix),
         'variable' => $variableName,
         ':package_description' => $description,
+        'spatie/package-' . $packageSlug . '-laravel' => 'spatie/package-skeleton-laravel'
     ]);
 
     match (true) {
@@ -351,6 +352,22 @@ if (! $useUpdateChangelogWorkflow) {
     safeUnlink(__DIR__.'/.github/workflows/update-changelog.yml');
 }
 
-confirm('Execute `composer install` and run tests?', true) && run('composer install && composer test');
+if (confirm('Execute `composer install` and run tests?', true)) {
+    run('composer install && composer test');
+
+    if (confirm('Install workbench?', true)) {
+
+        writeln('------');
+        writeln('Recommended answers:');
+        writeln('Install Workbench DevTool?: Yes');
+        writeln('Export .env file as?: .env');
+        writeln('Generate workbench/bootstrap/app.php file?: Yes');
+        writeln('Generate workbench/bootstrap/providers.php file?: Yes');
+        writeln('------');
+
+        run('./vendor/bin/testbench workbench:install');
+
+    }
+};
 
 confirm('Let this script delete itself?', true) && unlink(__FILE__);

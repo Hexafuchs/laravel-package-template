@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
  */
 class SkeletonCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = ':package_slug_without_prefix';
 
     public $description = 'My command';
 

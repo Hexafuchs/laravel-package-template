@@ -19,7 +19,7 @@ class PackageServiceProvider extends ServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name(':package_slug_without_prefix')
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_migration_table_name_table')

@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://www.phpdoc.org"
 >
-    <title>laravel-audit</title>
+    <title>:package_slug</title>
     <paths>
         <output>docs/build</output>
     </paths>

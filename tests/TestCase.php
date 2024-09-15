@@ -32,7 +32,7 @@ class TestCase extends Orchestra
         // $this->backwardCompatibleDatabase();
 
         /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
+        $migration = include __DIR__.'/../database/migrations/create_migration_table_name_table.php.stub';
         $migration->up();
         */
     }

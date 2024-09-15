@@ -59,8 +59,8 @@ jobs:
 
       #- name: Publish package files
       #  run: |
-      #    php vendor/bin/testbench vendor:publish --tag=":package_slug-config"
-      #    php vendor/bin/testbench vendor:publish --tag=":package_slug-migrations"
+      #    php vendor/bin/testbench vendor:publish --tag=":package_slug_without_prefix-config"
+      #    php vendor/bin/testbench vendor:publish --tag=":package_slug_without_prefix-migrations"
 
       - name: Execute tests
         run: vendor/bin/pest --ci
